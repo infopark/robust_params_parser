@@ -10,7 +10,11 @@ class RobustParamsParserTest < Test::Unit::TestCase
 
   class MyApp
     def call(env)
-      [200, {}, [env['action_dispatch.request.request_parameters']['foo']]]
+      if env['action_dispatch.request.request_parameters']['fail']
+        raise MultiJson::DecodeError
+      else
+        [200, {}, [env['action_dispatch.request.request_parameters']['foo']]]
+      end
     end
   end
 
@@ -31,5 +35,11 @@ class RobustParamsParserTest < Test::Unit::TestCase
   def test_responds_with_400_on_parse_error
     post '/', '---boom!', {'CONTENT_TYPE' => 'application/json'}
     assert last_response.bad_request?
+  end
+
+  def test_rescues_only_param_parsing_errors
+    assert_raise MultiJson::DecodeError do
+      post '/', MultiJson.encode({'fail' => true}), {'CONTENT_TYPE' => 'application/json'}
+    end
   end
 end

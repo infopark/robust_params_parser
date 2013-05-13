@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name = 'robust_params_parser'
-  gem.version = '0.0.1'
+  gem.version = '0.0.2'
   gem.description = 'Params parser Rack middleware able to handle parsing errors'
   gem.summary = gem.description
   gem.homepage = 'https://github.com/kostia/robust_params_parser'
