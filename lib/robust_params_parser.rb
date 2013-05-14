@@ -1,5 +1,7 @@
+require 'multi_json'
+
 class RobustParamsParser < ActionDispatch::ParamsParser
-  DecodeError = Class.new(MultiJson::DecodeError)
+  DecodeError = Class.new(::MultiJson::DecodeError)
 
   def initialize(app, parsers={})
     super(app, parsers)
@@ -15,7 +17,7 @@ class RobustParamsParser < ActionDispatch::ParamsParser
 
   def parse_formatted_parameters(env)
     super(env)
-  rescue MultiJson::DecodeError
+  rescue ::MultiJson::DecodeError
     raise RobustParamsParser::DecodeError
   end
 end

@@ -2,6 +2,10 @@
 
 Temporary workaround for https://github.com/rails/rails/pull/7424
 
+## Caveats
+
+Only works if you're using `MultiJson`.
+
 ## Installation
 
 ```ruby
