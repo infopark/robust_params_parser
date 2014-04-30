@@ -3,6 +3,9 @@
 Params parser Rack middleware able to handle parsing errors.
 Temporary workaround for https://github.com/rails/rails/pull/7424
 
+For Rails 3 only. As of Rails 4 this workaround is obsolete.
+
+
 ## Installation
 
 ```ruby
